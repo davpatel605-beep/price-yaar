@@ -18,29 +18,6 @@ import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
 type Page = 'home' | 'product' | 'admin';
 
 function App() {
-  
-  useEffect(() => {
-    async function fetchData() {
-
-      const API_KEY = 607add012dadcfacf6c4eb6464541fefa0d1e59068cb5240f7df1a4c350cc6a3
-
-      const res = await fetch(`https://serpapi.com/search.json?q=iphone&engine=google_shopping&api_key=${607add012dadcfacf6c4eb6464541fefa0d1e59068cb5240f7df1a4c350cc6a3}`);
-      const data = await res.json();
-
-      const products = data.shopping_results;
-
-      const best = products.reduce((lowest: any, current: any) => {
-        const price1 = parseInt(lowest.price.replace(/[^0-9]/g, ""));
-        const price2 = parseInt(current.price.replace(/[^0-9]/g, ""));
-        return price2 < price1 ? current : lowest;
-      });
-
-      console.log("BEST PRODUCT:", best);
-    }
-
-    fetchData();
-  }, []);
-
   // App state
   const [showSplash, setShowSplash] = useState(true);
 
