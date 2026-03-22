@@ -18,6 +18,20 @@ import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
 type Page = 'home' | 'product' | 'admin';
 
 function App() {
+  useEffect(() => {
+  async function fetchData() {
+    const res = await fetch(
+      "https://serpapi.com/search.json?q=iphone&engine=google_shopping&api_key=607add012dadcfacf6c4eb6464541fefa0d1e59068cb5240f7df1a4c350cc6a3"
+    );
+
+    const data = await res.json();
+
+    console.log("DATA:", data);
+  }
+
+  fetchData();
+}, []);
+
   // App state
   const [showSplash, setShowSplash] = useState(true);
   const [currentPage, setCurrentPage] = useState<Page>('home');
