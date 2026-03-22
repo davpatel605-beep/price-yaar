@@ -20,9 +20,6 @@ type Page = 'home' | 'product' | 'admin';
 function App() {
   // App state
   const [showSplash, setShowSplash] = useState(true);
-
-  // App state
-  const [showSplash, setShowSplash] = useState(true);
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProduct, setSelectedProduct] = useState<ProductWithPrices | null>(null);
   
