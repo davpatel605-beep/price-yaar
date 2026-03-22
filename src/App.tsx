@@ -18,6 +18,7 @@ import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
 type Page = 'home' | 'product' | 'admin';
 
 function App() {
+  console.log("APP RUNNING");
   useEffect(() => {
   async function fetchData() {
     const res = await fetch(
