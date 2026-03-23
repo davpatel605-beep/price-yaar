@@ -26,8 +26,51 @@ function App() {
   const [products, setProducts] = useState([]);
   console.log("APP RUNNING");
   useEffect(() => {
-    
+   async function fetchProducts() {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*");
+
+    if (error) {
+      console.log("ERROR:", error);
+    } else {
+      console.log("DATA:", data);
+      setProducts(data);
+    }
+  }
+
+  fetchProducts();
 }, []);
+
+return (
+  <div>
+    <h1>Products</h1>
+
+    {products.map((item, index) => (
+      <div key={index} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
+        
+        <h2>{item["Product Name"]}</h2>
+
+        <p>Price: ₹{item["Price"]}</p>
+
+        <p>Rating: {item["Product Rating"]}</p>
+
+        <img 
+          src={item["Product Image"]} 
+          alt={item["Product Name"]} 
+          width="150"
+        />
+
+        <br />
+
+        <a href={item["Product URL"]} target="_blank">
+          Buy Now
+        </a>
+
+      </div>
+    ))}
+  </div>
+);
 
   // App state
   const [showSplash, setShowSplash] = useState(true);
