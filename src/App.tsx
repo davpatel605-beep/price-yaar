@@ -13,7 +13,7 @@ import { AuthModal } from '@/components/AuthModal';
 import { ComingSoonModal } from '@/components/ComingSoonModal';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
-import { categories, banners, mockProducts, mockProductPrices, getProductsWithPrices, mockUser } from '@/data/mockData';
+import { categories, banners, getProductsWithPrices } from '@/data/mockData';
 import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
 import { createClient } from "@supabase/supabase-js";
 
@@ -78,8 +78,8 @@ return (
   const [selectedProduct, setSelectedProduct] = useState<ProductWithPrices | null>(null);
   
   // Data state
-  const [products, setProducts] = useState<Product[]>(mockProducts);
-  const [productPrices, setProductPrices] = useState<ProductPrice[]>(mockProductPrices);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productPrices, setProductPrices] = useState<ProductPrice[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductWithPrices[]>(getProductsWithPrices());
   
   // Filter state
@@ -141,7 +141,7 @@ return (
   const handleLogin = useCallback((_provider: 'google' | 'apple' | 'email', _credentials?: { email: string; password: string }) => {
     // Simulate login
     setTimeout(() => {
-      setUser(mockUser);
+      setUser(null);
       setIsAuthModalOpen(false);
       toast.success('Welcome back, Admin!');
     }, 1000);
