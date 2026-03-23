@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { createClient } from "@supabase/supabase-js";
 import { SplashScreen } from '@/components/SplashScreen';
 import { Navbar } from '@/components/Navbar';
 import { HeroBanner } from '@/components/HeroBanner';
@@ -14,6 +15,10 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 import { categories, banners, mockProducts, mockProductPrices, getProductsWithPrices, mockUser } from '@/data/mockData';
 import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://wolhksrjrossztdsuuly.supabase.co",sb_publishable_UltwN-C9DGrlNgiFzu1Auw_V5MY-Mos);
 
 type Page = 'home' | 'product' | 'admin';
 
