@@ -1,3 +1,4 @@
+console.log("NEW CODE RUNNING 🔥");
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from "@supabase/supabase-js";
 import { SplashScreen } from '@/components/SplashScreen';
