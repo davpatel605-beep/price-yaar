@@ -18,7 +18,7 @@ import type { Product, ProductPrice, ProductWithPrices, User } from '@/types';
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  "https://wolhksrjrossztdsuuly.supabase.co",sb_publishable_UltwN-C9DGrlNgiFzu1Auw_V5MY-Mos);
+  "https://wolhksrjrossztdsuuly.supabase.co","sb_publishable_UltwN-C9DGrlNgiFzu1Auw_V5MY-Mos");
 
 type Page = 'home' | 'product' | 'admin';
 
