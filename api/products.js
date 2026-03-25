@@ -1,8 +1,8 @@
+import https from "https";
+
 export default async function handler(req, res) {
   try {
     const API_KEY = "607add012dadcfacf6c4eb6464541fefa0d1e59068cb5240f7df1a4c350cc6a3";
-
-    const https = require("https");
 
     const url = `https://serpapi.com/search.json?q=iphone&engine=google_shopping&api_key=${API_KEY}`;
 
