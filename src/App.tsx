@@ -11,26 +11,18 @@ function App() {
     loadProducts();
   }, []);
 
-  const loadProducts = async () => {
-    console.log("Fetching products...");
+ const loadProducts = async () => {
+  const { data, error } = await getProducts();
 
-    const { data, error } = await getProducts();
+  if (error) {
+    console.log("FULL ERROR:", error);
+    alert(JSON.stringify(error));
+  } else {
+    setProducts(data || []);
+  }
 
-    if (error) {
-      console.error("ERROR:", error);
-      setErrorMsg("Error loading products");
-    } else {
-      console.log("DATA:", data);
-
-      if (!data || data.length === 0) {
-        setErrorMsg("No products found in database");
-      }
-
-      setProducts(data || []);
-    }
-
-    setLoading(false);
-  };
+  setLoading(false);
+};
 
   // Loading state
   if (loading) {
