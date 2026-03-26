@@ -13,19 +13,22 @@ function App() {
       .from("products")
       .select("*");
 
-    console.log("DATA:", data);
+    console.log(data);
 
-    if (error) {
-      console.error(error);
-    } else {
-      setProducts(data || []);
-    }
+    if (data) setProducts(data);
   };
 
   return (
-  <pre>{JSON.stringify(products, null, 2)}</pre>
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Price Yaar 🔥</h1>
+
+      <h1 className="text-2xl font-bold mb-4">
+        Price Yaar 🔥
+      </h1>
+
+      {/* DEBUG */}
+      <pre className="text-xs bg-gray-100 p-2 mb-4">
+        {JSON.stringify(products, null, 2)}
+      </pre>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((item, index) => (
@@ -33,7 +36,6 @@ function App() {
 
             <img
               src={item.product_image}
-              alt=""
               className="w-full h-40 object-cover"
             />
 
@@ -44,6 +46,7 @@ function App() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
