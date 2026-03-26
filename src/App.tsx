@@ -62,25 +62,24 @@ function App() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {products.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white p-3 rounded-lg shadow hover:shadow-lg transition"
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-40 object-cover rounded"
-              />
+  <div key={item.id} className="bg-white p-3 rounded-lg shadow">
 
-              <h2 className="text-sm font-semibold mt-2 line-clamp-2">
-                {item.name}
-              </h2>
+    <img
+      src={item.product_image}
+      className="w-full h-40 object-cover rounded"
+    />
 
-              <p className="text-green-600 font-bold mt-1">
-                ₹{item.price}
-              </p>
-            </div>
-          ))}
+    <h2 className="text-sm font-semibold mt-2">
+      {item.product_name}
+    </h2>
+
+    <p className="text-green-600 font-bold">
+      ₹{item.price}
+    </p>
+
+  </div>
+))}
+
         </div>
 
       </div>
