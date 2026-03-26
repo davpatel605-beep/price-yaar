@@ -23,6 +23,7 @@ function App() {
   };
 
   return (
+  <pre>{JSON.stringify(products, null, 2)}</pre>
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Price Yaar 🔥</h1>
 
