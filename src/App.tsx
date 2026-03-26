@@ -1,56 +1,89 @@
-
 import { useEffect, useState } from "react";
-import { getProducts } from "./lib/supabase";
+import { supabase } from "./lib/supabase";
 
-function App() {
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
- const loadProducts = async () => {
-  const { data, error } = await getProducts();
-
-  if (error) {
-    console.log("FULL ERROR:", error);
-    alert(JSON.stringify(error));
-  } else {
-    setProducts(data || []);
-  }
-
-  setLoading(false);
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
 };
 
-  // Loading state
-  if (loading) {
-    return <h1 className="p-4">Loading...</h1>;
-  }
+function App() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    setError("");
+
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      setError(error.message);
+    } else {
+      setProducts(data || []);
+    }
+
+    setLoading(false);
+  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Price Yaar 🔥</h1>
+    <div className="min-h-screen bg-gray-100">
 
-      {/* Error message */}
-      {errorMsg && (
-        <p className="text-red-500 mb-4">{errorMsg}</p>
-      )}
+      {/* Navbar */}
+      <div className="bg-black text-white p-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold">Price Yaar 🔥</h1>
+      </div>
 
-      {/* Products */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {products.map((item) => (
-          <div key={item.id} className="border p-2 rounded">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full h-40 object-cover"
-            />
-            <h2 className="font-semibold">{item.name}</h2>
-            <p className="text-green-600">₹{item.price}</p>
-          </div>
-        ))}
+      {/* Content */}
+      <div className="p-4">
+
+        {loading && (
+          <p className="text-center text-lg">Loading products...</p>
+        )}
+
+        {error && (
+          <p className="text-center text-red-500">{error}</p>
+        )}
+
+        {!loading && products.length === 0 && (
+          <p className="text-center text-gray-500">
+            No products found in database
+          </p>
+        )}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {products.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white p-3 rounded-lg shadow hover:shadow-lg transition"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-40 object-cover rounded"
+              />
+
+              <h2 className="text-sm font-semibold mt-2 line-clamp-2">
+                {item.name}
+              </h2>
+
+              <p className="text-green-600 font-bold mt-1">
+                ₹{item.price}
+              </p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </div>
   );
